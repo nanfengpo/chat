@@ -7,7 +7,7 @@ import (
 	"github.com/nanfengpo/chat/server/push"
 	"github.com/nanfengpo/chat/server/store"
 	t "github.com/nanfengpo/chat/server/store/types"
-	"github.com/nanfengpo/fcm"
+	"github.com/tinode/fcm"
 )
 
 var handler Handler
