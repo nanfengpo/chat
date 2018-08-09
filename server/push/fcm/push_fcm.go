@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/tinode/chat/server/push"
-	"github.com/tinode/chat/server/store"
-	t "github.com/tinode/chat/server/store/types"
-	"github.com/tinode/fcm"
+	"github.com/nanfengpo/chat/server/push"
+	"github.com/nanfengpo/chat/server/store"
+	t "github.com/nanfengpo/chat/server/store/types"
+	"github.com/nanfengpo/fcm"
 )
 
 var handler Handler

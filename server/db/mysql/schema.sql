@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS tinode;
+DROP DATABASE IF EXISTS nanfengpo;
 
-CREATE DATABASE tinode CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE nanfengpo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE tinode;
+USE nanfengpo;
 
 
 CREATE TABLE kvmeta(

@@ -1,4 +1,4 @@
-"""Python implementation of a Tinode chatbot."""
+"""Python implementation of a nanfengpo chatbot."""
 
 import argparse
 import base64
@@ -145,7 +145,7 @@ def note_read(topic, seq):
     return pb.ClientMsg(note=pb.ClientNote(topic=topic, what=pb.READ, seq_id=seq))
 
 def init_server(listen):
-    # Launch plugin server: acception connection(s) from the Tinode server.
+    # Launch plugin server: acception connection(s) from the nanfengpo server.
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=16))
     pbx.add_PluginServicer_to_server(Plugin(), server)
     server.add_insecure_port(listen)
@@ -308,10 +308,10 @@ if __name__ == '__main__':
     """Parse command-line arguments. Extract server host name, listen address, authentication scheme"""
     random.seed()
 
-    purpose = "Tino, Tinode's chatbot."
+    purpose = "Tino, nanfengpo's chatbot."
     print(purpose)
     parser = argparse.ArgumentParser(description=purpose)
-    parser.add_argument('--host', default='localhost:6061', help='address of Tinode server gRPC endpoint')
+    parser.add_argument('--host', default='localhost:6061', help='address of nanfengpo server gRPC endpoint')
     parser.add_argument('--listen', default='0.0.0.0:40051', help='address to listen on for incoming Plugin API calls')
     parser.add_argument('--login-basic', help='login using basic authentication username:password')
     parser.add_argument('--login-token', help='login using token authentication')

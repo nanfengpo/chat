@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tinode/chat/server/auth"
-	"github.com/tinode/chat/server/store"
-	t "github.com/tinode/chat/server/store/types"
+	"github.com/nanfengpo/chat/server/auth"
+	"github.com/nanfengpo/chat/server/store"
+	t "github.com/nanfengpo/chat/server/store/types"
 	rdb "gopkg.in/gorethink/gorethink.v4"
 )
 
@@ -25,7 +25,7 @@ type adapter struct {
 
 const (
 	defaultHost     = "localhost:28015"
-	defaultDatabase = "tinode"
+	defaultDatabase = "nanfengpo"
 
 	dbVersion = 105
 
@@ -992,7 +992,7 @@ func (a *adapter) FindUsers(uid t.Uid, req, opt []string) ([]t.Subscription, err
 	// Query for selecting matches where every group includes at least one required match (restricting search to
 	// group members).
 	/*
-		r.db('tinode').
+		r.db('nanfengpo').
 			table('users').
 			getAll(<all tags here>, {index: "Tags"}).
 			pluck("Id", "Access", "CreatedAt", "UpdatedAt", "Public", "Tags").

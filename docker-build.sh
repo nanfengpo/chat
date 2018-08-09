@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Build Tinode docker images
+# Build nanfengpo docker images
 
 for line in $@; do
   eval "$line"
@@ -25,22 +25,22 @@ dbtags=( mysql rethinkdb )
 # Build an images for various DB backends
 for dbtag in "${dbtags[@]}"
 do
-  rmitags="tinode/tinode-${dbtag}:${ver[0]}.${ver[1]}.${ver[2]}"
-  buildtags="--tag tinode/tinode-${dbtag}:${ver[0]}.${ver[1]}.${ver[2]}"
+  rmitags="nanfengpo/nanfengpo-${dbtag}:${ver[0]}.${ver[1]}.${ver[2]}"
+  buildtags="--tag nanfengpo/nanfengpo-${dbtag}:${ver[0]}.${ver[1]}.${ver[2]}"
   if [ -n "$FULLRELEASE" ]; then
-    rmitags="${rmitags} tinode/tinode-${dbtag}:latest tinode/tinode-${dbtag}:${ver[0]}.${ver[1]}"
-    buildtags="${buildtags} --tag tinode/tinode-${dbtag}:latest --tag tinode/tinode-${dbtag}:${ver[0]}.${ver[1]}"
+    rmitags="${rmitags} nanfengpo/nanfengpo-${dbtag}:latest nanfengpo/nanfengpo-${dbtag}:${ver[0]}.${ver[1]}"
+    buildtags="${buildtags} --tag nanfengpo/nanfengpo-${dbtag}:latest --tag nanfengpo/nanfengpo-${dbtag}:${ver[0]}.${ver[1]}"
   fi
   docker rmi ${rmitags}
-  docker build --build-arg VERSION=$tag --build-arg TARGET_DB=${dbtag} ${buildtags} docker/tinode
+  docker build --build-arg VERSION=$tag --build-arg TARGET_DB=${dbtag} ${buildtags} docker/nanfengpo
 done
 
 # Build chatbot image
-buildtags="--tag tinode/chatbot:${ver[0]}.${ver[1]}.${ver[2]}"
-rmitags="tinode/chatbot:${ver[0]}.${ver[1]}.${ver[2]}"
+buildtags="--tag nanfengpo/chatbot:${ver[0]}.${ver[1]}.${ver[2]}"
+rmitags="nanfengpo/chatbot:${ver[0]}.${ver[1]}.${ver[2]}"
 if [ -n "$FULLRELEASE" ]; then
-  rmitags="${rmitags} tinode/chatbot:latest tinode/chatbot:${ver[0]}.${ver[1]}"
-  buildtags="${buildtags}  --tag tinode/chatbot:latest --tag tinode/chatbot:${ver[0]}.${ver[1]}"
+  rmitags="${rmitags} nanfengpo/chatbot:latest nanfengpo/chatbot:${ver[0]}.${ver[1]}"
+  buildtags="${buildtags}  --tag nanfengpo/chatbot:latest --tag nanfengpo/chatbot:${ver[0]}.${ver[1]}"
 fi
 docker rmi ${rmitags}
 docker build --build-arg VERSION=$tag ${buildtags} docker/chatbot

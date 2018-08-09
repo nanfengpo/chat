@@ -24,8 +24,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/tinode/chat/server/store"
-	"github.com/tinode/chat/server/store/types"
+	"github.com/nanfengpo/chat/server/store"
+	"github.com/nanfengpo/chat/server/store/types"
 
 	"golang.org/x/crypto/acme/autocert"
 )
@@ -275,7 +275,7 @@ func tlsRedirect(toPort string) http.HandlerFunc {
 // Get API key from an HTTP request.
 func getAPIKey(req *http.Request) string {
 	// Check header.
-	apikey := req.Header.Get("X-Tinode-APIKey")
+	apikey := req.Header.Get("X-nanfengpo-APIKey")
 
 	// Check URL query parameters.
 	if apikey == "" {

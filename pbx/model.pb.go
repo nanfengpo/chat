@@ -53,7 +53,7 @@ func (InfoNote) EnumDescriptor() ([]byte, []int) {
 type RespCode int32
 
 const (
-	// Instruct Tinode server to continue with default processing of the client request.
+	// Instruct nanfengpo server to continue with default processing of the client request.
 	RespCode_CONTINUE RespCode = 0
 	// Drop the request as if the client did not send it
 	RespCode_DROP RespCode = 1
@@ -3505,9 +3505,9 @@ var _Node_serviceDesc = grpc.ServiceDesc{
 // Client API for Plugin service
 
 type PluginClient interface {
-	// This plugin method is called by Tinode server for every message received from the clients. The
+	// This plugin method is called by nanfengpo server for every message received from the clients. The
 	// method returns a ServerCtrl message. Non-zero ServerCtrl.code indicates that no further
-	// processing is needed. The Tinode server will generate a {ctrl} message from the returned ServerCtrl
+	// processing is needed. The nanfengpo server will generate a {ctrl} message from the returned ServerCtrl
 	// and forward it to the client session.
 	// ServerCtrl.code equals to 0 instructs the server to continue with default processing of the client message.
 	FireHose(ctx context.Context, in *ClientReq, opts ...grpc.CallOption) (*ServerResp, error)
@@ -3589,9 +3589,9 @@ func (c *pluginClient) Message(ctx context.Context, in *MessageEvent, opts ...gr
 // Server API for Plugin service
 
 type PluginServer interface {
-	// This plugin method is called by Tinode server for every message received from the clients. The
+	// This plugin method is called by nanfengpo server for every message received from the clients. The
 	// method returns a ServerCtrl message. Non-zero ServerCtrl.code indicates that no further
-	// processing is needed. The Tinode server will generate a {ctrl} message from the returned ServerCtrl
+	// processing is needed. The nanfengpo server will generate a {ctrl} message from the returned ServerCtrl
 	// and forward it to the client session.
 	// ServerCtrl.code equals to 0 instructs the server to continue with default processing of the client message.
 	FireHose(context.Context, *ClientReq) (*ServerResp, error)

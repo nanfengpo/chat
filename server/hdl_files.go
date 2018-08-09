@@ -20,8 +20,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tinode/chat/server/store"
-	"github.com/tinode/chat/server/store/types"
+	"github.com/nanfengpo/chat/server/store"
+	"github.com/nanfengpo/chat/server/store/types"
 )
 
 func largeFileServe(wrt http.ResponseWriter, req *http.Request) {

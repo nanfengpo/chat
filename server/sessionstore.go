@@ -16,8 +16,8 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/tinode/chat/pbx"
-	"github.com/tinode/chat/server/store"
+	"github.com/nanfengpo/chat/pbx"
+	"github.com/nanfengpo/chat/server/store"
 )
 
 // SessionStore holds live sessions. Long polling sessions are stored in a linked list with

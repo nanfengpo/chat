@@ -1,6 +1,6 @@
-# Command Line Client for Tinode
+# Command Line Client for nanfengpo
 
-This is a command line chat client. It's written in Python as a demonstration of gRPC Tinode API.
+This is a command line chat client. It's written in Python as a demonstration of gRPC nanfengpo API.
 
 Files generated from [protobuf](../pbx/model.proto) are [provided](../pbx) for convenience. Files are generated with command
 ```

@@ -11,9 +11,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tinode/chat/server/auth"
-	rh "github.com/tinode/chat/server/ringhash"
-	"github.com/tinode/chat/server/store/types"
+	"github.com/nanfengpo/chat/server/auth"
+	rh "github.com/nanfengpo/chat/server/ringhash"
+	"github.com/nanfengpo/chat/server/store/types"
 )
 
 const (

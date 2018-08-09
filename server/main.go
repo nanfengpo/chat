@@ -27,29 +27,29 @@ import (
 	gzip "github.com/gorilla/handlers"
 
 	// Authenticators
-	"github.com/tinode/chat/server/auth"
-	_ "github.com/tinode/chat/server/auth/anon"
-	_ "github.com/tinode/chat/server/auth/basic"
-	_ "github.com/tinode/chat/server/auth/token"
+	"github.com/nanfengpo/chat/server/auth"
+	_ "github.com/nanfengpo/chat/server/auth/anon"
+	_ "github.com/nanfengpo/chat/server/auth/basic"
+	_ "github.com/nanfengpo/chat/server/auth/token"
 
 	// Database backends
-	_ "github.com/tinode/chat/server/db/mysql"
-	_ "github.com/tinode/chat/server/db/rethinkdb"
+	_ "github.com/nanfengpo/chat/server/db/mysql"
+	_ "github.com/nanfengpo/chat/server/db/rethinkdb"
 
 	// Push notifications
-	"github.com/tinode/chat/server/push"
-	_ "github.com/tinode/chat/server/push/fcm"
-	_ "github.com/tinode/chat/server/push/stdout"
+	"github.com/nanfengpo/chat/server/push"
+	_ "github.com/nanfengpo/chat/server/push/fcm"
+	_ "github.com/nanfengpo/chat/server/push/stdout"
 
-	"github.com/tinode/chat/server/store"
+	"github.com/nanfengpo/chat/server/store"
 
 	// Credential validators
-	_ "github.com/tinode/chat/server/validate/email"
-	_ "github.com/tinode/chat/server/validate/tel"
+	_ "github.com/nanfengpo/chat/server/validate/email"
+	_ "github.com/nanfengpo/chat/server/validate/tel"
 	"google.golang.org/grpc"
 
 	// File upload handlers
-	_ "github.com/tinode/chat/server/media/fs"
+	_ "github.com/nanfengpo/chat/server/media/fs"
 )
 
 const (
@@ -201,7 +201,7 @@ type configType struct {
 func main() {
 	log.Printf("Server 'v%s:%s:%s'; pid %d; started with %d process(es)", currentVersion,
 		buildstamp, store.GetAdapterName(), os.Getpid(), runtime.GOMAXPROCS(runtime.NumCPU()))
-	var configfile = flag.String("config", "./tinode.conf", "Path to config file.")
+	var configfile = flag.String("config", "./nanfengpo.conf", "Path to config file.")
 	// Path to static content.
 	var staticPath = flag.String("static_data", defaultStaticPath, "Path to directory with static files to be served.")
 	var listenOn = flag.String("listen", "", "Override address and port to listen on for HTTP(S) clients.")

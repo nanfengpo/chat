@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Publish Tinode docker images
+# Publish nanfengpo docker images
 
 for line in $@; do
   eval "$line"
@@ -39,48 +39,48 @@ do
     curl -i -X DELETE \
       -H "Accept: application/json" \
       -H "Authorization: JWT ${jstoken}" \
-      https://hub.docker.com/v2/repositories/tinode/tinode-${dbtag}/tags/latest/
+      https://hub.docker.com/v2/repositories/nanfengpo/nanfengpo-${dbtag}/tags/latest/
 
     curl -i -X DELETE \
       -H "Accept: application/json" \
       -H "Authorization: JWT ${jstoken}" \
-      https://hub.docker.com/v2/repositories/tinode/tinode-${dbtag}/tags/${ver[0]}.${ver[1]}/
+      https://hub.docker.com/v2/repositories/nanfengpo/nanfengpo-${dbtag}/tags/${ver[0]}.${ver[1]}/
   fi
   curl -i -X DELETE \
     -H "Accept: application/json" \
     -H "Authorization: JWT ${jstoken}" \
-    https://hub.docker.com/v2/repositories/tinode/tinode-${dbtag}/tags/${ver[0]}.${ver[1]}.${ver[2]}/
+    https://hub.docker.com/v2/repositories/nanfengpo/nanfengpo-${dbtag}/tags/${ver[0]}.${ver[1]}.${ver[2]}/
 done
 
 if [ -n "$FULLRELEASE" ]; then
   curl -i -X DELETE \
     -H "Accept: application/json" \
     -H "Authorization: JWT ${jstoken}" \
-    https://hub.docker.com/v2/repositories/tinode/chatbot/tags/latest/
+    https://hub.docker.com/v2/repositories/nanfengpo/chatbot/tags/latest/
   curl -i -X DELETE \
     -H "Accept: application/json" \
     -H "Authorization: JWT ${jstoken}" \
-    https://hub.docker.com/v2/repositories/tinode/chatbot/tags/${ver[0]}.${ver[1]}/
+    https://hub.docker.com/v2/repositories/nanfengpo/chatbot/tags/${ver[0]}.${ver[1]}/
 fi
 curl -i -X DELETE \
   -H "Accept: application/json" \
   -H "Authorization: JWT ${jstoken}" \
-  https://hub.docker.com/v2/repositories/tinode/chatbot/tags/${ver[0]}.${ver[1]}.${ver[2]}/
+  https://hub.docker.com/v2/repositories/nanfengpo/chatbot/tags/${ver[0]}.${ver[1]}.${ver[2]}/
 
 # Deploy images for various DB backends
 for dbtag in "${dbtags[@]}"
 do
   # Deploy tagged image
   if [ -n "$FULLRELEASE" ]; then
-    docker push tinode/tinode-${dbtag}:latest
-    docker push tinode/tinode-${dbtag}:"${ver[0]}.${ver[1]}"
+    docker push nanfengpo/nanfengpo-${dbtag}:latest
+    docker push nanfengpo/nanfengpo-${dbtag}:"${ver[0]}.${ver[1]}"
   fi
-  docker push tinode/tinode-${dbtag}:"${ver[0]}.${ver[1]}.${ver[2]}"
+  docker push nanfengpo/nanfengpo-${dbtag}:"${ver[0]}.${ver[1]}.${ver[2]}"
 done
 
 # Deploy chatbot images
 if [ -n "$FULLRELEASE" ]; then
-  docker push tinode/chatbot:latest
-  docker push tinode/chatbot:"${ver[0]}.${ver[1]}"
+  docker push nanfengpo/chatbot:latest
+  docker push nanfengpo/chatbot:"${ver[0]}.${ver[1]}"
 fi
-docker push tinode/chatbot:"${ver[0]}.${ver[1]}.${ver[2]}"
+docker push nanfengpo/chatbot:"${ver[0]}.${ver[1]}.${ver[2]}"

@@ -11,9 +11,9 @@ import (
 	"time"
 
 	jcr "github.com/DisposaBoy/JsonConfigReader"
-	_ "github.com/tinode/chat/server/db/mysql"
-	_ "github.com/tinode/chat/server/db/rethinkdb"
-	"github.com/tinode/chat/server/store"
+	_ "github.com/nanfengpo/chat/server/db/mysql"
+	_ "github.com/nanfengpo/chat/server/db/rethinkdb"
+	"github.com/nanfengpo/chat/server/store"
 )
 
 type configType struct {
@@ -152,7 +152,7 @@ func getPassword(n int) string {
 func main() {
 	var reset = flag.Bool("reset", false, "first delete the database if one exists")
 	var datafile = flag.String("data", "", "name of file with sample data")
-	var conffile = flag.String("config", "./tinode.conf", "config of the database connection")
+	var conffile = flag.String("config", "./nanfengpo.conf", "config of the database connection")
 	flag.Parse()
 
 	var data Data

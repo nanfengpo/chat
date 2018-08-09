@@ -1,8 +1,8 @@
-# Tinode Instant Messaging Server
+# nanfengpo Instant Messaging Server
 
 <img src="docs/logo.svg" align="left" width=128 height=128> Instant messaging server. Backend in pure [Go](http://golang.org) (license [GPL 3.0](http://www.gnu.org/licenses/gpl-3.0.en.html)), custom client-side binding in Java and Javascript, as well as [gRPC](https://grpc.io/) client support for C++, C#, Go, Java, Node, PHP, Python, Ruby, Objective-C (license [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)). Wire transport is JSON over websocket (long polling is also available) for custom bindings, or [protobuf](https://developers.google.com/protocol-buffers/) over plain TCP for gRPC. Persistent storage [RethinkDB](http://rethinkdb.com/) and MySQL. A third-party [DynamoDB adapter](https://github.com/riandyrn/chat/tree/master/server/db/dynamodb) also exists. Other databases can be supported by writing custom adapters.
 
-Tinode is meant as a replacement for XMPP. On the surface it's a lot like open source WhatsApp or Telegram.
+nanfengpo is meant as a replacement for XMPP. On the surface it's a lot like open source WhatsApp or Telegram.
 
 Version 0.15. This is beta-quality software: feature-complete but probably with a few bugs. Follow [instructions](INSTALL.md) to install and run. Read [API documentation](docs/API.md).
 
@@ -16,8 +16,8 @@ The goal of this project is to actually deliver on XMPP's original vision: creat
 
 ## Getting support
 
-* For support, general questions, discussions post to [https://groups.google.com/d/forum/tinode](https://groups.google.com/d/forum/tinode).
-* For bugs and feature requests [open an issue](https://github.com/tinode/chat/issues/new).
+* For support, general questions, discussions post to [https://groups.google.com/d/forum/nanfengpo](https://groups.google.com/d/forum/nanfengpo).
+* For bugs and feature requests [open an issue](https://github.com/nanfengpo/chat/issues/new).
 * Read [API documentation](docs/API.md).
 
 
@@ -25,11 +25,11 @@ The goal of this project is to actually deliver on XMPP's original vision: creat
 
 ### Web 
 
-A web demo is usually available at https://api.tinode.co/ ([source](https://github.com/tinode/example-react-js/)). Login as one of `alice`, `bob`, `carol`, `dave`, `frank`. Password is `<login>123`, e.g. login for `alice` is `alice123`. You can discover other users by email or phone by prefixing them with `email:` or `tel:` respectively. Emails are `<login>@example.com`, e.g. `alice@example.com`, phones are `17025550001` through `17025550009`. 
+A web demo is usually available at https://api.nanfengpo.co/ ([source](https://github.com/nanfengpo/example-react-js/)). Login as one of `alice`, `bob`, `carol`, `dave`, `frank`. Password is `<login>123`, e.g. login for `alice` is `alice123`. You can discover other users by email or phone by prefixing them with `email:` or `tel:` respectively. Emails are `<login>@example.com`, e.g. `alice@example.com`, phones are `17025550001` through `17025550009`.
 
 ### Android
 
-[Android demo](https://github.com/tinode/android-example) is mostly stable and functional. See screenshots below. A [debug APK](https://github.com/tinode/android-example/releases/latest) is provided for convenience. 
+[Android demo](https://github.com/nanfengpo/android-example) is mostly stable and functional. See screenshots below. A [debug APK](https://github.com/nanfengpo/android-example/releases/latest) is provided for convenience.
 
 ### Command Line
 
@@ -41,7 +41,7 @@ A text-only [command line client](./tn-cli) implements every possible command.
 
 * User `Tino` is a [basic chatbot](./chatbot) which responds with a [random quote](http://fortunes.cat-v.org/) to any message.
 
-* As generally accepted, when you register a new account you are asked for an email address. The server will send an email with a verification code to that address and you can use it to validate the account. To make things easier for testing, the server will also accept `123456` as a verification code. Remove line `"debug_response": "123456"` from `tinode.conf` to disable this option. 
+* As generally accepted, when you register a new account you are asked for an email address. The server will send an email with a verification code to that address and you can use it to validate the account. To make things easier for testing, the server will also accept `123456` as a verification code. Remove line `"debug_response": "123456"` from `nanfengpo.conf` to disable this option.
 
 * The demo server is configured to use [ACME](https://letsencrypt.org/) TLS [implementation](https://godoc.org/golang.org/x/crypto/acme) with hard-coded requirement for [SNI](https://en.wikipedia.org/wiki/Server_Name_Indication). If you are unable to connect then the most likely reason is your TLS client's missing support for SNI. Use a different client. 
 
@@ -49,7 +49,7 @@ A text-only [command line client](./tn-cli) implements every possible command.
 
 ### Supported
 
-* [Android](https://github.com/tinode/android-example/), [web](https://github.com/tinode/example-react-js/), and [command line](tn-cli/) clients.
+* [Android](https://github.com/nanfengpo/android-example/), [web](https://github.com/nanfengpo/example-react-js/), and [command line](tn-cli/) clients.
 * One-on-one messaging.
 * Group messaging with every member's access permissions managed individually. The maximum number of members is configurable (128 by default).
 * Topic access control with permissions for various actions.

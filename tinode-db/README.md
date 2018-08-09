@@ -1,4 +1,4 @@
-# Utility to Create and initialize `tinode` DB in a RethinkDB or MySQL
+# Utility to Create and initialize `nanfengpo` DB in a RethinkDB or MySQL
 
 
 ## Build the package:
@@ -14,14 +14,14 @@
 
 Run from the command line.
 
-`tinode-db [parameters]`
+`nanfengpo-db [parameters]`
 
 Parameters:
- - `--reset`: delete `tinode` database if one exists, then re-create it in a blank state;
- - `--data=FILENAME`: fill `tinode` database with sample data from the provided file. See [data.json](data.json).
- - `--config=FILENAME`: load configuration from FILENAME. Example config is included as [tinode.conf](tinode.conf).
+ - `--reset`: delete `nanfengpo` database if one exists, then re-create it in a blank state;
+ - `--data=FILENAME`: fill `nanfengpo` database with sample data from the provided file. See [data.json](data.json).
+ - `--config=FILENAME`: load configuration from FILENAME. Example config is included as [nanfengpo.conf](nanfengpo.conf).
  
-RethinkDB adapter uses [snowflake](http://github.com/tinode/snowflake/) to generate object IDs. The `worker_id` and `uid_key` parameters are used to initialize snowflake and only used when sample data is loaded.
+RethinkDB adapter uses [snowflake](http://github.com/nanfengpo/snowflake/) to generate object IDs. The `worker_id` and `uid_key` parameters are used to initialize snowflake and only used when sample data is loaded.
   - `worker_id` is the snowflake ID of the host running this utility, integer in the range 0 - 1023
   - `uid_key` is a base64-encoded 16 byte XTEA encryption key to (weakly) encrypt snowflake-generated IDs so they don't appear sequential. You probably want to use your own key in production.
   - `adapter_config.database` is the name of database to generate
@@ -35,4 +35,4 @@ Avatar photos curtesy of https://www.pexels.com/ under [CC0 license](https://www
 
 ## Links:
 
-See [database schema](https://github.com/tinode/chat/tree/master/server/dbschema.md)
+See [database schema](https://github.com/nanfengpo/chat/tree/master/server/dbschema.md)

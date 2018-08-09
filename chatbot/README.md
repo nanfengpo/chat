@@ -1,6 +1,6 @@
-# Tinode Chatbot Example
+# nanfengpo Chatbot Example
 
-This is a rudimentary chatbot for Tinode using [gRPC API](../pbx/). It's written in Python as a demonstration
+This is a rudimentary chatbot for nanfengpo using [gRPC API](../pbx/). It's written in Python as a demonstration
 that the API is language-independent.
 
 The chat bot subscribes to events stream using Plugin API and logs in as 'Tino the Chatbot' user. The event stream API is used to listen for new accounts. When a new account is created, the bot initiates a p2p topic with the new user. Then it listens for messages sent to the topic and responds to each with a random quote from `quotes.txt` file.
@@ -16,21 +16,21 @@ python -m grpc_tools.protoc -I../pbx --python_out=. --grpc_python_out=. ../pbx/m
 
 **Warning!** The chatbot image is almost 750MB: the basic Python 3 docker image is nearly 690MB, gRPC adds another 60MB.
 
-1. Follow [instructions](../docker/README.md) to build and run dockerized Tinode chat server up to an including _step 3_. 
+1. Follow [instructions](../docker/README.md) to build and run dockerized nanfengpo chat server up to an including _step 3_.
 	
 2. In _step 4_ run the server adding `--env PLUGIN_PYTHON_CHAT_BOT_ENABLED=true` and `--volume botdata:/botdata` to the command line:
 	1. **RethinkDB**:
 	```
-	$ docker run -p 6060:18080 -d --name tinode-srv --env PLUGIN_PYTHON_CHAT_BOT_ENABLED=true --volume botdata:/botdata --network tinode-net tinode/tinode-rethink:latest
+	$ docker run -p 6060:18080 -d --name nanfengpo-srv --env PLUGIN_PYTHON_CHAT_BOT_ENABLED=true --volume botdata:/botdata --network nanfengpo-net nanfengpo/nanfengpo-rethink:latest
 	```
 	1. **MySQL**:
 	```
-	$ docker run -p 6060:18080 -d --name tinode-srv --env PLUGIN_PYTHON_CHAT_BOT_ENABLED=true --volume botdata:/botdata --network tinode-net tinode/tinode-mysql:latest
+	$ docker run -p 6060:18080 -d --name nanfengpo-srv --env PLUGIN_PYTHON_CHAT_BOT_ENABLED=true --volume botdata:/botdata --network nanfengpo-net nanfengpo/nanfengpo-mysql:latest
 	```
 	
 3. Run the chatbot
 	```
-	$ docker run -d --name tino-chatbot --network tinode-net --volume botdata:/botdata tinode/chatbot:latest
+	$ docker run -d --name tino-chatbot --network nanfengpo-net --volume botdata:/botdata nanfengpo/chatbot:latest
 	```
 	
 4. Test that the bot is functional by pointing your browser to http://localhost:6060/x/, login and talk to user `Tino`. The user should respond to every message with a random quote.
@@ -48,7 +48,7 @@ Follow instructions to [install grpc](https://grpc.io/docs/quickstart/python.htm
 pip install grpcio
 ```
 
-Start the [tinode server](../INSTALL.md) first. Then start the chatbot with credentials of the user you want to be your bot, `alice` in this example:
+Start the [nanfengpo server](../INSTALL.md) first. Then start the chatbot with credentials of the user you want to be your bot, `alice` in this example:
 ```
 python chatbot.py --login-basic=alice:alice123
 ```

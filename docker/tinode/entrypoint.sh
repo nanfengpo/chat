@@ -24,5 +24,5 @@ if [ ! -f /botdata/.tn-cookie ] || [ "$RESET_DB" = true ] ; then
 	./credentials.sh < /botdata/tino-password > /botdata/.tn-cookie
 fi
 
-# Run the tinode server.
-./tinode --config=working.config --static_data=static 2> /var/log/tinode.log
+# Run the nanfengpo server.
+./nanfengpo --config=working.config --static_data=static 2> /var/log/nanfengpo.log

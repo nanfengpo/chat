@@ -45,11 +45,11 @@
 		"uid_key": "$UID_ENCRYPTION_KEY",
 		"adapters": {
 			"mysql": {
-				"database": "tinode",
+				"database": "nanfengpo",
 				"dsn": "$MYSQL_DSN?parseTime=true"
 			},
 			"rethinkdb": {
-				"database": "tinode",
+				"database": "nanfengpo",
 				"addresses": "rethinkdb"
 			}
 		}
@@ -65,7 +65,7 @@
 				"sender": "noreply@example.com",
 				"sender_password": "your-password-here",
 				"msg_body_templ": "./templ/email-validation-body.templ",
-				"msg_subject": "Tinode chat: confirm email",
+				"msg_subject": "nanfengpo chat: confirm email",
 				"headers": [],
 				"max_retries": 4,
 				"debug_response": "123456"

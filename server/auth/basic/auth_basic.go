@@ -1,7 +1,7 @@
 package basic
 
 // This handler must be kept in a separate package because it's referenced by
-// tinode-db
+// nanfengpo-db
 
 import (
 	"encoding/json"
@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tinode/chat/server/auth"
-	"github.com/tinode/chat/server/store"
-	"github.com/tinode/chat/server/store/types"
+	"github.com/nanfengpo/chat/server/auth"
+	"github.com/nanfengpo/chat/server/store"
+	"github.com/nanfengpo/chat/server/store/types"
 
 	"golang.org/x/crypto/bcrypt"
 )

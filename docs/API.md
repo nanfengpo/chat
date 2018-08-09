@@ -57,7 +57,7 @@
 
 ## How it works?
 
-Tinode is an IM router and a store. Conceptually it loosely follows a publish-subscribe model.
+nanfengpo is an IM router and a store. Conceptually it loosely follows a publish-subscribe model.
 
 Server connects sessions, users, and topics. Session is a network connection between a client application and the server. User represents a human being who connects to the server with a session. Topic is a named communication channel which routes content between sessions.
 
@@ -102,7 +102,7 @@ Client establishes a connection to the server over HTTP(S). Server offers the fo
  * `/v0/file/s` for serving files (downloads)
 
 `v0` denotes API version (currently zero). Every HTTP(S) request must include the API key. The server checks for the API key in the following order:
-* HTTP header `X-Tinode-APIKey`
+* HTTP header `X-nanfengpo-APIKey`
 * URL query parameter `apikey` (/v0/file/s/abcdefg.jpeg?apikey=...)
 * Form value `apikey`
 * Cookie `apikey`
@@ -214,7 +214,7 @@ User's access to a topic is defined by two sets of permissions: user's desired p
 
 Topic's default access is established at the topic creation time by `{sub.init.defacs}` and can be subsequently modified by `{set}` messages. Default access is defined for two categories of users: authenticated and anonymous. This value is applied as a default "given" permission to all new subscriptions.
 
-Client may replace explicit permissions in `{sub}` and `{set}` messages with an empty string to tell Tinode to use default permissions. If client specifies no default access permissions at topic creation time, authenticated users will receive a `RWP` permission, anonymous users will receive and empty permission which means every subscription request must be explicitly approved by the topic manager.
+Client may replace explicit permissions in `{sub}` and `{set}` messages with an empty string to tell nanfengpo to use default permissions. If client specifies no default access permissions at topic creation time, authenticated users will receive a `RWP` permission, anonymous users will receive and empty permission which means every subscription request must be explicitly approved by the topic manager.
 
 Access permissions can be assigned on a per-user basis by `{set}` messages.
 
@@ -291,7 +291,7 @@ Topic `fnd` is read-only. `{pub}` messages to `fnd` are rejected.
 
 #### Query language
 
-Tinode query language is used to define search queries for finding users and topics. The query is a string containing tags separated by spaces or commas. Tags are strings - individual query terms which are matched against user's or topic's tags. The tags can be written in an RTL language but the query as a whole is parsed left to right. Spaces are treated as the `AND` operator, commas (as well commas preceded and/or followed by a space) as the `OR` operator. The order of operators is ignored: all `AND` operators are grouped together, all `OR` operators are grouped together. `OR` takes precedence over `AND`.
+nanfengpo query language is used to define search queries for finding users and topics. The query is a string containing tags separated by spaces or commas. Tags are strings - individual query terms which are matched against user's or topic's tags. The tags can be written in an RTL language but the query as a whole is parsed left to right. Spaces are treated as the `AND` operator, commas (as well commas preceded and/or followed by a space) as the `OR` operator. The order of operators is ignored: all `AND` operators are grouped together, all `OR` operators are grouped together. `OR` takes precedence over `AND`.
 
 Tags containing spaces or commas must be enclosed in double quotes (`"`, `\u0022`): i.e. `"abc, def"` is treated as a single token. Tags must start with a Unicode letter or digit. Tags must not contain the double quote (`"`, `\u0022`).
 
@@ -316,7 +316,7 @@ Tags containing spaces or commas must be enclosed in double quotes (`"`, `\u0022
 
 Peer to peer (P2P) topics represent communication channels between strictly two users. The name of the topic is different for each of the two participants. Each of them sees the name of the topic as the user ID of the other participant: `usr` followed by base64 URL-encoded ID of the user. For example, if two users `usrOj0B3-gSBSs` and `usrIU_LOVwRNsc` start a P2P topic, the first one will see it as `usrIU_LOVwRNsc`, the second as `usrOj0B3-gSBSs`. The P2P topic has no owner.
 
-A P2P topic is created by one user subscribing to topic with the name equal to the ID of the other user. For instance, user `usrOj0B3-gSBSs` can establish a P2P topic with user `usrIU_LOVwRNsc` by sending a `{sub topic="usrIU_LOVwRNsc"}`. Tinode will respond with a `{ctrl}` packet with the name of the newly created topic as described above. The other user will receive a `{data}` message on `me` topic with either a request to confirm the subscription or a notification of a successful subscription, depending on user's default permissions.
+A P2P topic is created by one user subscribing to topic with the name equal to the ID of the other user. For instance, user `usrOj0B3-gSBSs` can establish a P2P topic with user `usrIU_LOVwRNsc` by sending a `{sub topic="usrIU_LOVwRNsc"}`. nanfengpo will respond with a `{ctrl}` packet with the name of the newly created topic as described above. The other user will receive a `{data}` message on `me` topic with either a request to confirm the subscription or a notification of a successful subscription, depending on user's default permissions.
 
 The 'public' parameter of P2P topics is user-dependent. For instance a P2P topic between users A and B would show user A's 'public' to user B and vice versa. If a user updates 'public', all user's P2P topics will automatically update 'public' too.
 
@@ -326,14 +326,14 @@ The 'private' parameter of a P2P topic is defined by each participant individual
 
 Group topics represent communication channels between multiple users. The name of a group topic is `grp` followed by a string of characters from base64 URL-encoding set. No other assumptions can be made about internal structure or length of the group name.
 
-A group topic is created by sending a `{sub}` message with the topic field set to string `new` optionally followed by any characters, e.g. `new` or `newAbC123` are equivalent. Tinode will respond with a `{ctrl}` message with the name of the newly created topic, i.e. `{sub topic="new"}` is replied with `{ctrl topic="grpmiKBkQVXnm3P"}`. If topic creation fails, the error is reported on the original topic name, i.e. `new` or `newAbC123`. The user who created the topic becomes topic owner. Ownership can be transferred to another user with a `{set}` message but one user must remain the owner at all times.
+A group topic is created by sending a `{sub}` message with the topic field set to string `new` optionally followed by any characters, e.g. `new` or `newAbC123` are equivalent. nanfengpo will respond with a `{ctrl}` message with the name of the newly created topic, i.e. `{sub topic="new"}` is replied with `{ctrl topic="grpmiKBkQVXnm3P"}`. If topic creation fails, the error is reported on the original topic name, i.e. `new` or `newAbC123`. The user who created the topic becomes topic owner. Ownership can be transferred to another user with a `{set}` message but one user must remain the owner at all times.
 
 A user joining or leaving the topic generates a `{pres}` message to all other users who are currently in the joined state with the topic.
 
 
 ## Using Server-Issued Message IDs
 
-Tinode provides basic support for client-side caching of `{data}` messages in the form of server-issued sequential message IDs. The client may request the last message id from the topic by issuing a `{get what="desc"}` message. If the returned ID is greater than the ID of the latest received message, the client knows that the topic has unread messages and their count. The client may fetch these messages using `{get what="data"}` message. The client may also paginate history retrieval by using message IDs.
+nanfengpo provides basic support for client-side caching of `{data}` messages in the form of server-issued sequential message IDs. The client may request the last message id from the topic by issuing a `{get what="desc"}` message. If the returned ID is greater than the ID of the latest received message, the client knows that the topic has unread messages and their count. The client may fetch these messages using `{get what="data"}` message. The client may also paginate history retrieval by using message IDs.
 
 ## User Agent and Presence Notifications
 
@@ -347,7 +347,7 @@ An empty `ua=""` _user agent_ is not reported. I.e. if user attaches to `me` wit
 
 ## Push Notifications Support
 
-Tinode supports mobile push notifications though compile-time plugins. The channel published by the plugin receives a copy of every data message which was attempted to be delivered. The server supports [Google FCM](https://firebase.google.com/docs/cloud-messaging/) out of the box.
+nanfengpo supports mobile push notifications though compile-time plugins. The channel published by the plugin receives a copy of every data message which was attempted to be delivered. The server supports [Google FCM](https://firebase.google.com/docs/cloud-messaging/) out of the box.
 
 ## Public and Private Fields
 
@@ -382,7 +382,7 @@ vcard: {
   impp: [
     {
       type: "OTHER",
-      uri: "tinode:usrRkDVe0PYDOo", // string, email address
+      uri: "nanfengpo:usrRkDVe0PYDOo", // string, email address
     }, ...
   ], // array of objects, list of user's IM handles
   photo: {
@@ -420,7 +420,7 @@ Large files create problems when sent in-band for multiple reasons:
  * limits on database storage as in-band messages are stored in database fields
  * in-band messages must be downloaded completely as a part of downloading chat history
 
-Tinode provides two endpoints for handling large files: `/v0/file/u` for uploading files and `v0/file/s` for downloading. The endpoints require the client to provide both [API key](#connecting-to-the-server) and login credentials. The server checks credentials in the following order:
+nanfengpo provides two endpoints for handling large files: `/v0/file/u` for uploading files and `v0/file/s` for downloading. The endpoints require the client to provide both [API key](#connecting-to-the-server) and login credentials. The server checks credentials in the following order:
 
 **Login credentials**
  * HTTP header `Authorization` (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)
@@ -478,11 +478,11 @@ pub: {
 }
 ```
 
-It's important to list the URLs in the `head.attachments` field. Tinode server uses this field to maintain the uploaded file's use counter. Once the use counter drops to zero for a given file (for instance, because a message with the shared URL was deleted or because the client failed to include the URl in the `head.attachments` field), the server will garbage collect the file. Only relative URLs should be used. Absolute URLs in the `head.attachments` field are ignored.
+It's important to list the URLs in the `head.attachments` field. nanfengpo server uses this field to maintain the uploaded file's use counter. Once the use counter drops to zero for a given file (for instance, because a message with the shared URL was deleted or because the client failed to include the URl in the `head.attachments` field), the server will garbage collect the file. Only relative URLs should be used. Absolute URLs in the `head.attachments` field are ignored.
 
 ### Downloading
 
-The serving endpoint `/v0/file/s` serves files in response to HTTP GET requests. The client must evaluate relative URLs against this endpoint, i.e. if it receives a URL `mfHLxDWFhfU.pdf` or `./mfHLxDWFhfU.pdf` it should interpret it as a path `/v0/file/s/mfHLxDWFhfU.pdf` at the current Tinode HTTP server. As a security measure, the client should not send security credentials if the download URL is absolute and leads to another server.
+The serving endpoint `/v0/file/s` serves files in response to HTTP GET requests. The client must evaluate relative URLs against this endpoint, i.e. if it receives a URL `mfHLxDWFhfU.pdf` or `./mfHLxDWFhfU.pdf` it should interpret it as a path `/v0/file/s/mfHLxDWFhfU.pdf` at the current nanfengpo HTTP server. As a security measure, the client should not send security credentials if the download URL is absolute and leads to another server.
 
 ## Messages
 
@@ -1016,7 +1016,7 @@ meta: {
       seen: { // object, if this is a P2P topic, info on when the peer was last
               //online
         when: "2015-10-24T10:26:09.716Z", // timestamp
-        ua: "Tinode/1.0 (Android 5.1)" // string, user agent of peer's client
+        ua: "nanfengpo/1.0 (Android 5.1)" // string, user agent of peer's client
       }
     },
     ...
@@ -1033,7 +1033,7 @@ meta: {
 
 #### `{pres}`
 
-Tinode uses `{pres}` message to inform clients of important events. A separate [document](https://docs.google.com/spreadsheets/d/e/2PACX-1vStUDHb7DPrD8tF5eANLu4YIjRkqta8KOhLvcj2precsjqR40eDHvJnnuuS3bw-NcWsP1QKc7GSTYuX/pubhtml?gid=1959642482&single=true) explains all possible use cases.
+nanfengpo uses `{pres}` message to inform clients of important events. A separate [document](https://docs.google.com/spreadsheets/d/e/2PACX-1vStUDHb7DPrD8tF5eANLu4YIjRkqta8KOhLvcj2precsjqR40eDHvJnnuuS3bw-NcWsP1QKc7GSTYuX/pubhtml?gid=1959642482&single=true) explains all possible use cases.
 
 ```js
 pres: {
@@ -1045,7 +1045,7 @@ pres: {
   clear: 15, // integer, "what" is "del", an update to the delete transaction ID.
   delseq: [{low: 123}, {low: 126, hi: 136}], // array of ranges, "what" is "del",
 			// ranges of IDs of deleted messages, optional
-  ua: "Tinode/1.0 (Android 2.2)", // string, a User Agent string identifying client
+  ua: "nanfengpo/1.0 (Android 2.2)", // string, a User Agent string identifying client
 						// software if "what" is "on" or "ua", optional
   act: "usr2il9suCbuko",	// string, user who performed the action, optional
   tgt: "usrRkDVe0PYDOo", 	// string, user affected by the action, optional

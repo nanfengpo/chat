@@ -7,14 +7,14 @@ Describe your issue here.
 
 ### Your environment
 #### Server-side
-- [ ] api.tinode.co
+- [ ] api.nanfengpo.co
 - [ ] Your own setup:
   * platform (Windows, Mac, Linux etc)
-  * version of tinode server, e.g. `0.15.2-rc3`
+  * version of nanfengpo server, e.g. `0.15.2-rc3`
   * database backend
   
 #### Client-side
-- [ ] TinodeWeb/tinodejs: javascript client
+- [ ] nanfengpoWeb/nanfengpojs: javascript client
   * Browser make and version.
 - [ ] Tindroid: Android app
   * Android API level (e.g. 25).

@@ -1,21 +1,21 @@
-# Docker file builds an image with a tinode chat server.
+# Docker file builds an image with a nanfengpo chat server.
 # The server exposes port 18080.
 # In order to run the image you have to link it to a running RethinkDB container
-# (assuming it's named 'rethinkdb') and map the port where the tinode server accepts connections:
+# (assuming it's named 'rethinkdb') and map the port where the nanfengpo server accepts connections:
 #
 # $ docker run -p 6060:18080 -d --link rethinkdb \
 #	--env UID_ENCRYPTION_KEY=base64+encoded+16+bytes= \
 #	--env API_KEY_SALT=base64+encoded+32+bytes \
 #	--env AUTH_TOKEN_KEY=base64+encoded+32+bytes \
-#	tinode-server
+#	nanfengpo-server
 
 FROM alpine:3.7
 
 ARG VERSION=0.14.5
 ENV VERSION=$VERSION
 
-LABEL maintainer="Gene Sokolov <gene@tinode.co>"
-LABEL name="TinodeChatServer"
+LABEL maintainer="Gene Sokolov <gene@nanfengpo.co>"
+LABEL name="nanfengpoChatServer"
 LABEL version=$VERSION
 
 # Builds for RethinkDB by default. Alternatively use `--build-arg TARGET_DB=mysql` to build for MySQL.
@@ -28,7 +28,7 @@ ENV TARGET_DB=$TARGET_DB
 ENV RESET_DB=false
 
 # The MYSQL DSN connection.
-ENV MYSQL_DSN='root@tcp(mysql)/tinode'
+ENV MYSQL_DSN='root@tcp(mysql)/nanfengpo'
 
 # Disable chatbot plugin by default.
 ENV PLUGIN_PYTHON_CHAT_BOT_ENABLED=false
@@ -47,12 +47,12 @@ ENV AUTH_TOKEN_KEY=wfaY2RgF2S1OQI/ZlK+LSrp1KB2jwAdGAIHQ7JZn+Kc=
 # Adding bash and grep as they are used here.
 RUN apk add --no-cache bash grep
 
-WORKDIR /opt/tinode
+WORKDIR /opt/nanfengpo
 
-ADD https://github.com/tinode/chat/releases/download/v$VERSION/tinode-$TARGET_DB.linux-amd64.tar.gz .
+ADD https://github.com/nanfengpo/chat/releases/download/v$VERSION/nanfengpo-$TARGET_DB.linux-amd64.tar.gz .
 
-RUN tar -xzf tinode-$TARGET_DB.linux-amd64.tar.gz \
-	&& rm tinode-$TARGET_DB.linux-amd64.tar.gz
+RUN tar -xzf nanfengpo-$TARGET_DB.linux-amd64.tar.gz \
+	&& rm nanfengpo-$TARGET_DB.linux-amd64.tar.gz
 
 # Copy config template to the container.
 COPY config.template .

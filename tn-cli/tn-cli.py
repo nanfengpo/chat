@@ -1,4 +1,4 @@
-"""The Python implementation of the gRPC Tinode client."""
+"""The Python implementation of the gRPC nanfengpo client."""
 
 # To make print() compatible between p2 and p3
 from __future__ import print_function
@@ -426,10 +426,10 @@ def print_server_params(params):
 
 if __name__ == '__main__':
     """Parse command-line arguments. Extract host name and authentication scheme, if one is provided"""
-    purpose = "Tinode command line client. Version " + VERSION + "."
+    purpose = "nanfengpo command line client. Version " + VERSION + "."
     print(purpose)
     parser = argparse.ArgumentParser(description=purpose)
-    parser.add_argument('--host', default='localhost:6061', help='address of Tinode server')
+    parser.add_argument('--host', default='localhost:6061', help='address of nanfengpo server')
     parser.add_argument('--login-basic', help='login using basic authentication username:password')
     parser.add_argument('--login-token', help='login using token authentication')
     parser.add_argument('--login-cookie', action='store_true', help='read token from cookie file and use it for authentication')
